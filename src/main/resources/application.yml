@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: pharmacy-api
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/pharmacy?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    username: ${DB_USER:pharmacy}
+    password: ${DB_PASSWORD:pharmacy123}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

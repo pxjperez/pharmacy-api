@@ -1,0 +1,38 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ..:/workspace/pharmacy-api:cached
+      - maven-cache:/home/vscode/.m2
+    command: sleep infinity
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks: [pharmacy-network]
+
+  mysql:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: pharmacy
+      MYSQL_USER: pharmacy
+      MYSQL_PASSWORD: pharmacy123
+      MYSQL_ROOT_PASSWORD: root123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot123"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    networks: [pharmacy-network]
+
+volumes:
+  mysql-data:
+  maven-cache:
+networks:
+  pharmacy-network:

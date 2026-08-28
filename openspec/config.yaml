@@ -1,0 +1,10 @@
+schema: spec-driven
+context: |
+  Java 21, Spring Boot, Maven, Spring Data JPA y MySQL.
+  La API gestiona productos y sigue Controller -> Service -> Repository.
+rules:
+  specs:
+    - Use SHALL para requisitos normativos.
+    - Incluya escenarios Given/When/Then.
+  tasks:
+    - Cada tarea debe ser pequeña y verificable.

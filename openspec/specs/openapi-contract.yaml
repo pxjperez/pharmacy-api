@@ -1,0 +1,55 @@
+openapi: 3.0.3
+info:
+  title: Pharmacy API
+  version: 1.0.0
+paths:
+  /api/productos:
+    get:
+      summary: Lista productos
+      responses:
+        '200': { description: Lista obtenida }
+    post:
+      summary: Crea un producto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Producto' }
+      responses:
+        '201': { description: Producto creado }
+        '400': { description: Datos inválidos }
+  /api/productos/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema: { type: integer, format: int64 }
+    get:
+      summary: Obtiene un producto
+      responses:
+        '200': { description: Producto encontrado }
+        '404': { description: Producto no encontrado }
+    put:
+      summary: Actualiza un producto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Producto' }
+      responses:
+        '200': { description: Producto actualizado }
+    delete:
+      summary: Elimina un producto
+      responses:
+        '204': { description: Producto eliminado }
+components:
+  schemas:
+    Producto:
+      type: object
+      required: [nombre, precio, stock]
+      properties:
+        id: { type: integer, format: int64, readOnly: true }
+        nombre: { type: string, maxLength: 120 }
+        descripcion: { type: string, maxLength: 500 }
+        precio: { type: number, format: double, minimum: 0 }
+        stock: { type: integer, minimum: 0 }
