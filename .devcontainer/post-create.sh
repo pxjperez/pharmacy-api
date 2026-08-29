@@ -1,27 +1,25 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "Configurando Git..."
-git config --global user.name "Juan Carlos Pérez Gil"
-git config --global user.email "PXJPEREZ@cibertec.edu.pe"
+echo "Verificando entorno..."
 
-echo "Instalando herramientas de desarrollo asistido por IA..."
-npm install --global \
-  @fission-ai/openspec@latest \
-  opencode-ai@latest \
-  @anthropic-ai/claude-code@latest
+java_version="$(java --version 2>&1)"
+maven_version="$(mvn --version 2>&1)"
+node_version="$(node --version)"
+npm_version="$(npm --version)"
 
-echo "Verificando herramientas..."
-java --version
-mvn --version
-node --version
-npm --version
-kubectl version --client
-helm version
+echo "Java: $(printf '%s\n' "$java_version" | sed -n '1p')"
+echo "Maven: $(printf '%s\n' "$maven_version" | sed -n '1p')"
+echo "Node.js: $node_version"
+echo "NPM: $npm_version"
 
-if [[ -f "pom.xml" ]]; then
-  echo "Descargando dependencias Maven..."
-  mvn --batch-mode -DskipTests dependency:go-offline
+if command -v kubectl >/dev/null 2>&1; then
+  echo "kubectl: $(kubectl version --client --output=yaml | sed -n 's/^gitVersion: //p')"
 fi
 
-echo "Entorno listo. Ejecuta: mvn spring-boot:run"
+if command -v helm >/dev/null 2>&1; then
+  helm_version="$(helm version --short)"
+  echo "Helm: $helm_version"
+fi
+
+echo "Entorno verificado correctamente."
