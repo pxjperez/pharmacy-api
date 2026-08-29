@@ -8,10 +8,10 @@
     "ghcr.io/devcontainers/features/node:1": { "version": "22" },
     "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": { "version": "latest", "helm": "latest", "minikube": "none" }
   },
-  "forwardPorts": [8080, 3306],
+  "forwardPorts": [8080, 3307],
   "portsAttributes": {
     "8080": { "label": "Spring Boot API", "onAutoForward": "notify" },
-    "3306": { "label": "MySQL", "onAutoForward": "silent" }
+    "3307": { "label": "MySQL", "onAutoForward": "silent" }
   },
   "containerEnv": {
     "DB_URL": "jdbc:mysql://mysql:3306/pharmacy?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC",
