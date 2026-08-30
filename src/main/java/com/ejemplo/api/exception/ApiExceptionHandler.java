@@ -10,10 +10,25 @@ import java.util.Map;
 public class ApiExceptionHandler {
     @ExceptionHandler(RecursoNoEncontradoException.class)
     ResponseEntity<Map<String, Object>> noEncontrado(RecursoNoEncontradoException ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("timestamp", Instant.now(), "status", 404, "message", ex.getMessage()));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(Map.of("timestamp", Instant.now(), "status", 404, "message", ex.getMessage()));
     }
+
+    @ExceptionHandler(RecursoDuplicadoException.class)
+    ResponseEntity<Map<String, Object>> duplicado(RecursoDuplicadoException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(Map.of("timestamp", Instant.now(), "status", 409, "message", ex.getMessage()));
+    }
+
+    @ExceptionHandler(EntradaInvalidaException.class)
+    ResponseEntity<Map<String, Object>> entradaInvalida(EntradaInvalidaException ex) {
+        return ResponseEntity.badRequest()
+                .body(Map.of("timestamp", Instant.now(), "status", 400, "message", ex.getMessage()));
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     ResponseEntity<Map<String, Object>> validacion(MethodArgumentNotValidException ex) {
-        return ResponseEntity.badRequest().body(Map.of("timestamp", Instant.now(), "status", 400, "message", "Solicitud inválida"));
+        return ResponseEntity.badRequest()
+                .body(Map.of("timestamp", Instant.now(), "status", 400, "message", "Solicitud inválida"));
     }
 }

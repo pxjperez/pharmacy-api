@@ -1,25 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "Verificando entorno..."
+echo "Configurando Git..."
+git config --global user.name "Tu Nombre"
+git config --global user.email "Tu correo git"
 
-java_version="$(java --version 2>&1)"
-maven_version="$(mvn --version 2>&1)"
-node_version="$(node --version)"
-npm_version="$(npm --version)"
+echo "Configuando herramientas de desarrollo asistido por IA..."
+npm install --global @fission-ai/openspec@latest opencode-ai@latest
+openspec init --tools opencode --profile core
 
-echo "Java: $(printf '%s\n' "$java_version" | sed -n '1p')"
-echo "Maven: $(printf '%s\n' "$maven_version" | sed -n '1p')"
-echo "Node.js: $node_version"
-echo "NPM: $npm_version"
-
-if command -v kubectl >/dev/null 2>&1; then
-  echo "kubectl: $(kubectl version --client --output=yaml | sed -n 's/^gitVersion: //p')"
-fi
-
-if command -v helm >/dev/null 2>&1; then
-  helm_version="$(helm version --short)"
-  echo "Helm: $helm_version"
-fi
-
-echo "Entorno verificado correctamente."
+echo "Configuando de Git y Herramientas de desarrollo asistido por IA completada."

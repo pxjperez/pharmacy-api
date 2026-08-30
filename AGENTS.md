@@ -11,4 +11,5 @@
 - Persistencia con Spring Data JPA y MySQL.
 - No exponer lógica de negocio desde el controlador.
 - Validar entradas y conservar el contrato OpenAPI.
+- Todo endpoint u operación nueva DEBE agregarse a `openspec/specs/openapi-contract.yaml` como parte del mismo cambio, con sus esquemas y respuestas; si el cambio no altera la API, no hace falta tocarlo.
 - No modificar specs maestras directamente durante un cambio; archivar el cambio con OpenSpec.

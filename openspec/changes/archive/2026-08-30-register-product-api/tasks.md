@@ -6,4 +6,4 @@
 - [x] Agregar validación y tratamiento de errores.
 - [x] Configurar MySQL y Dev Container.
 - [x] Agregar prueba del controlador.
-- [ ] Validar manualmente el CRUD dentro del Dev Container.
+- [x] Validar manualmente el CRUD dentro del Dev Container.

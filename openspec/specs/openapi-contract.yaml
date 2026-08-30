@@ -42,6 +42,48 @@ paths:
       summary: Elimina un producto
       responses:
         '204': { description: Producto eliminado }
+  /api/usuarios:
+    get:
+      summary: Lista usuarios
+      responses:
+        '200': { description: Lista obtenida }
+    post:
+      summary: Crea un usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Usuario' }
+      responses:
+        '201': { description: Usuario creado }
+        '400': { description: Datos inválidos }
+        '409': { description: Nombre de usuario o email duplicado }
+  /api/usuarios/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema: { type: integer, format: int64 }
+    get:
+      summary: Obtiene un usuario
+      responses:
+        '200': { description: Usuario encontrado }
+        '404': { description: Usuario no encontrado }
+    put:
+      summary: Actualiza un usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Usuario' }
+      responses:
+        '200': { description: Usuario actualizado }
+        '404': { description: Usuario no encontrado }
+    delete:
+      summary: Elimina un usuario
+      responses:
+        '204': { description: Usuario eliminado }
+        '404': { description: Usuario no encontrado }
 components:
   schemas:
     Producto:
@@ -53,3 +95,12 @@ components:
         descripcion: { type: string, maxLength: 500 }
         precio: { type: number, format: double, minimum: 0 }
         stock: { type: integer, minimum: 0 }
+    Usuario:
+      type: object
+      required: [nombreUsuario, email, contrasena, rol]
+      properties:
+        id: { type: integer, format: int64, readOnly: true }
+        nombreUsuario: { type: string, maxLength: 120 }
+        email: { type: string, format: email, maxLength: 120 }
+        contrasena: { type: string, minLength: 6, writeOnly: true }
+        rol: { type: string, enum: [ADMIN, ENCARGADO] }

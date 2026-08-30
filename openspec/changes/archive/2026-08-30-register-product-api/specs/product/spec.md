@@ -3,7 +3,7 @@
 ## ADDED Requirements
 
 ### Requirement: Registro validado
-El sistema SHALL rechazar productos sin nombre, con precio negativo o con stock negativo.
+The system SHALL reject products without a name, with a negative price, or with negative stock.
 
 #### Scenario: Precio negativo
 - **GIVEN** un producto con precio menor que cero

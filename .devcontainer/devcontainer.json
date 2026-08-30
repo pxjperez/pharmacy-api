@@ -18,7 +18,8 @@
     "DB_URL": "jdbc:mysql://mysql:3306/pharmacy?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC",
     "DB_USER": "pharmacy",
     "DB_PASSWORD": "pharmacy123",
-    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    "MAVEN_OPTS": "-Djansi.force=false"
   },
   "postCreateCommand": "bash .devcontainer/post-create.sh",
   "postStartCommand": "bash .devcontainer/check-environment.sh",
@@ -26,8 +27,10 @@
     "vscode": {
       "extensions": [
         "vscjava.vscode-java-pack",
+        "vmware.vscode-boot-dev-pack",
         "vmware.vscode-spring-boot",
         "vscjava.vscode-spring-initializr",
+        "vscjava.vscode-maven",
         "redhat.vscode-yaml",
         "ms-azuretools.vscode-docker",
         "ms-kubernetes-tools.vscode-kubernetes-tools",
@@ -36,7 +39,15 @@
       "settings": {
         "java.configuration.updateBuildConfiguration": "automatic",
         "java.compile.nullAnalysis.mode": "automatic",
-        "terminal.integrated.defaultProfile.linux": "bash"
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "java.jdt.ls.java.home": "/usr/local/sdkman/candidates/java/current",
+        "java.configuration.runtimes": [
+          {
+            "name": "JavaSE-21",
+            "path": "/usr/local/sdkman/candidates/java/current",
+            "default": true
+          }
+        ]
       }
     }
   },

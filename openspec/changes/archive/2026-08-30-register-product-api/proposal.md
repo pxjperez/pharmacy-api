@@ -1,6 +1,6 @@
 # Propuesta: API de registro de productos
 
-## Por qué
+## Why
 La farmacia necesita digitalizar su catálogo y controlar precios y existencias.
 
 ## Qué cambia

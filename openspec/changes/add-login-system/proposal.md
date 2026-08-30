@@ -1,6 +1,6 @@
 # Propuesta: Sistema de login
 
-## Por qué
+## Why
 La farmacia necesita proteger el catálogo de productos y garantizar que solo usuarios autenticados puedan gestionarlo.
 
 ## Qué cambia
